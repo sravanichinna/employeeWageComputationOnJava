@@ -13,23 +13,18 @@ public class empWageComputation{
 		int fullTimeHour=8;
 		int partTimeHour=4;
 		int dailyEmpWage=0;
-		if(randomNum==fullTimePresent)
+		switch(randomNum)
 		{
-			System.out.println("employee is present full time: "+randomNum);
-			dailyEmpWage=fullTimeHour*wagePerHour;
-			System.out.println("Daily emp wage: "+dailyEmpWage);
+		case 1:
+			int partTimeWage=(partTimeHour*wagePerHour);
+			System.out.println("part time employee: "+partTimeWage);
+				break;
+		case 2:
+			int fullTimeWage=(fullTimeHour*wagePerHour);
+			System.out.println("full time employee: "+fullTimeWage);
+				break;
+		default:
+			System.out.println("Absent: "+absent);
 		}
-		else if(randomNum==partTimePresent)
-                {
-                        System.out.println("employee is present half time: "+randomNum);
-                        dailyEmpWage=partTimeHour*wagePerHour;
-                        System.out.println("Daily emp wage: "+dailyEmpWage);
-                }
-		 else
-                {
-                        System.out.println("employee is absent: "+randomNum);
-                        dailyEmpWage=absent*wagePerHour;
-                        System.out.println("Daily emp wage: "+dailyEmpWage);
-                }
 	}
 }
