@@ -1,33 +1,35 @@
-public class EmployeeWageBuilderArray implements IComputeEmpWage {
+import java.util.LinkedList;
+public class EmployeeWageBuilder implements IComputeEmpWage {
 
         public static final int IS_PART_TIME=1;
         public static final int IS_FULL_TIME=2;
 
         private int numOfCompany=0;
-        private CompanyEmpWage[] companyEmpWageArray;
+        private LinkedList<CompanyEmpWage> companyEmpWageList;
 
 
-        public EmployeeWageBuilderArray()
+        public EmployeeWageBuilder()
         {
-                companyEmpWageArray=new CompanyEmpWage[5];
+                companyEmpWageList=new LinkedList<>();
         }
 
         private void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth)
         {
-                companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
-                numOfCompany++;
+                CompanyEmpWage companyEmpWage=new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+                companyEmpWageList.add(companyEmpWage);
         }
 
         private void computeEmpWage()
         {
-                for (int i = 0; i <numOfCompany; i++)
+                for (int i = 0; i < companyEmpWageList.size(); i++)
                 {
-                        companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-                        System.out.println(companyEmpWageArray[i]);
+			CompanyEmpWage compantEmpWage=companyEmpWage.get(i);
+                        companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+                        System.out.println(companyEmpWage);
                 }
         }
 
-
+	
         private int computeEmpWage(CompanyEmpWage companyEmpWage)
         {
         int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
@@ -60,9 +62,10 @@ public class EmployeeWageBuilderArray implements IComputeEmpWage {
 
 
         public static void main(String[] args) {
-                EmployeeWageBuilderArray empWageBuilder=new EmployeeWageBuilderArray();
+                IComputeEmpWage empWageBuilder=new EmpWageBuilder();
                 empWageBuilder.addCompanyEmpWage("Dmart", 20, 2, 10);
                 empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
                 empWageBuilder.computeEmpWage();
+		System.out.println("total wage for DMart Company: "+empWageBuilder.getTotalWage(company"DMart"));
         }
 }
